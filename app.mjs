@@ -39,7 +39,7 @@ async function drawPage(){
   $('loading').textContent=navigator.onLine?'正在打开第 '+snapshot.page+' 页…':'正在读取离线页面…';
   try{
     if(activePart!==part.file){
-      if(activeDoc){await activeDoc.destroy();activeDoc=null;activePart=null;}
+      if(activeDoc){await activeDoc.loadingTask.destroy();activeDoc=null;activePart=null;}
       const bytes=await fetchPart(part);
       activeDoc=await pdfjs.getDocument({data:new Uint8Array(bytes),cMapUrl:urlFor('./vendor/pdfjs/cmaps/'),cMapPacked:true,standardFontDataUrl:urlFor('./vendor/pdfjs/standard_fonts/'),wasmUrl:urlFor('./vendor/pdfjs/wasm/'),isEvalSupported:false}).promise;
       activePart=part.file;
