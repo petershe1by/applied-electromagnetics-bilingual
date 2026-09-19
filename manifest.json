@@ -1,0 +1,126 @@
+{
+  "original_bytes": 206980611,
+  "original_sha256": "a16a92d75a02399ede89dcc31408b0875a8b517c106a662a49b42a5710325501",
+  "pages": 490,
+  "parts": [
+    {
+      "file": "read/pages-001-020.pdf",
+      "start": 1,
+      "end": 20,
+      "bytes": 5213731,
+      "sha256": "fde25f4ce57923aaca8826eb2e7e28ee42e00163bfe6b12af958f8c8b9b0baad"
+    },
+    {
+      "file": "read/pages-021-030.pdf",
+      "start": 21,
+      "end": 30,
+      "bytes": 6760764,
+      "sha256": "63b889383c11db7b44474d304d34f88ef53690f8a8602c3a91c17f5b1a4ebae6"
+    },
+    {
+      "file": "read/pages-031-040.pdf",
+      "start": 31,
+      "end": 40,
+      "bytes": 2888213,
+      "sha256": "354c31fc426fd8fb331cd1da405d564a3114527eb87a97b4bf78ce966c8df27e"
+    },
+    {
+      "file": "read/pages-041-060.pdf",
+      "start": 41,
+      "end": 60,
+      "bytes": 5701628,
+      "sha256": "4992b5900a49f91b51c96a7333484a12cea1be3edde8a8820400dde560e82044"
+    },
+    {
+      "file": "read/pages-061-080.pdf",
+      "start": 61,
+      "end": 80,
+      "bytes": 3839236,
+      "sha256": "617dda80bd712ef508804ccb954877f64a5ec4dc44695aaf007df79c5ea256cb"
+    },
+    {
+      "file": "read/pages-081-120.pdf",
+      "start": 81,
+      "end": 120,
+      "bytes": 3815374,
+      "sha256": "00d4abca49fd7a03e0f344a67db7c3b550d7d63fba475ab6e0e85a28f63ed3a5"
+    },
+    {
+      "file": "read/pages-121-160.pdf",
+      "start": 121,
+      "end": 160,
+      "bytes": 5641538,
+      "sha256": "4877b3f2a88266a7a46de69ef40d334c30d04e295cfb5df766e0dee3bdc9920a"
+    },
+    {
+      "file": "read/pages-161-200.pdf",
+      "start": 161,
+      "end": 200,
+      "bytes": 6610412,
+      "sha256": "8c51beb6eaf9b7147503cebb2a16e0b1b65dbd06275a6e06cced12226b1a64d1"
+    },
+    {
+      "file": "read/pages-201-240.pdf",
+      "start": 201,
+      "end": 240,
+      "bytes": 5639578,
+      "sha256": "2742196af01e6c289018d2b56bc07f7f6038fa411a1476cabd570e89e427fd69"
+    },
+    {
+      "file": "read/pages-241-280.pdf",
+      "start": 241,
+      "end": 280,
+      "bytes": 6262147,
+      "sha256": "fde6a34a795406733fc3b455686ccf9370787d79b4432f9aba341fbbe7f182fb"
+    },
+    {
+      "file": "read/pages-281-320.pdf",
+      "start": 281,
+      "end": 320,
+      "bytes": 6422126,
+      "sha256": "5743f39c3591eff0501017ff24b044cd531933bc0d47c92e7affa9a7aaefd5c4"
+    },
+    {
+      "file": "read/pages-321-360.pdf",
+      "start": 321,
+      "end": 360,
+      "bytes": 5832141,
+      "sha256": "eb810f310dbd1bc9cbce01c90cf0141a11b431f675ddee6fd47533559bbcee53"
+    },
+    {
+      "file": "read/pages-361-400.pdf",
+      "start": 361,
+      "end": 400,
+      "bytes": 6302471,
+      "sha256": "17dbe9dcc8b3fb674fc8d6447443b8a447a94ed5ea868007fcbdf3e9ed7e61df"
+    },
+    {
+      "file": "read/pages-401-440.pdf",
+      "start": 401,
+      "end": 440,
+      "bytes": 5494635,
+      "sha256": "b15544e304098213c08729e0c09a85c9a054aa497c6943f55e190cd9cd530a59"
+    },
+    {
+      "file": "read/pages-441-460.pdf",
+      "start": 441,
+      "end": 460,
+      "bytes": 2765998,
+      "sha256": "71131c6fd8fd1ebf0b00ace6186f805126488bac8cba2c471342dea5813064ec"
+    },
+    {
+      "file": "read/pages-461-480.pdf",
+      "start": 461,
+      "end": 480,
+      "bytes": 6747583,
+      "sha256": "dca639bf404805bdc098873b5816d3de051fa647c8a3422a6b122765dad05855"
+    },
+    {
+      "file": "read/pages-481-490.pdf",
+      "start": 481,
+      "end": 490,
+      "bytes": 1144307,
+      "sha256": "64b01113b7538323ea994a50c4bf49cc2927ce6dfe31fa33880e060b099dc5e3"
+    }
+  ]
+}
