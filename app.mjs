@@ -1,8 +1,10 @@
-import * as pdfjs from './vendor/pdfjs/build/pdf.mjs';
-pdfjs.GlobalWorkerOptions.workerSrc = new URL('./vendor/pdfjs/build/pdf.worker.mjs', import.meta.url).href;
+import * as pdfjs from './vendor/pdfjs/build/pdf.mjs?v=compat1';
+pdfjs.GlobalWorkerOptions.workerSrc = new URL('./vendor/pdfjs/build/pdf.worker.mjs?v=compat1', import.meta.url).href;
 const $ = id => document.getElementById(id);
 const BOOK_CACHE='em-book-gh-electromagnetics-a16a92d75a02';
 const KEY='em-reading-v1';
+let hadController=!!navigator.serviceWorker?.controller;
+navigator.serviceWorker?.addEventListener('controllerchange',()=>{if(hadController)location.reload();else hadController=true});
 const safeStore={get(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}},set(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch{}}};
 const saved=safeStore.get();
 const hashPage=Number(new URLSearchParams(location.hash.slice(1)).get('page'));
@@ -25,7 +27,7 @@ async function cachedResponse(part){return cache?.match(urlFor(part.file))}
 async function fetchPart(part,signal){
   const existing=await cachedResponse(part);if(existing)return existing.arrayBuffer();
   const response=await fetch(urlFor(part.file),{signal,credentials:'same-origin'});
-  if(!response.ok)throw new Error('下载失败，请检查网络或重新登录后重试。');
+  if(!response.ok)throw new Error('下载失败，请检查网络后重试。');
   const bytes=await response.arrayBuffer();
   if(bytes.byteLength!==part.bytes)throw new Error('书籍文件未完整收到，请重试。');
   const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(b=>b.toString(16).padStart(2,'0')).join('');

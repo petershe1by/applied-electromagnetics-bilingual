@@ -1,4 +1,4 @@
-const SHELL='em-reader-gh-electromagnetics-v2';
+const SHELL='em-reader-gh-electromagnetics-v3';
 const BOOK='em-book-gh-electromagnetics-a16a92d75a02';
 const BASE=new URL('./',self.location.href);
 const absolute=p=>new URL(p,BASE).href;
