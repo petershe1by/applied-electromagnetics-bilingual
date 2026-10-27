@@ -1,8 +1,8 @@
-const SHELL='em-reader-gh-electromagnetics-v4';
+const SHELL='em-reader-gh-electromagnetics-v5';
 const BOOK='em-book-gh-electromagnetics-a16a92d75a02';
 const BASE=new URL('./',self.location.href);
 const absolute=p=>new URL(p,BASE).href;
-const CORE=['./','./index.html','./style.css','./app.mjs?v=perf1','./book.json','./manifest.webmanifest','./icon.svg'];
+const CORE=['./','./index.html','./style.css','./app.mjs?v=perf2','./book.json?v=perf2','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(SHELL);
   for(const p of CORE){const r=await fetch(absolute(p),{cache:'no-cache'});if(!r.ok||r.redirected)throw new Error('Could not cache '+p);await cache.put(absolute(p),r)}

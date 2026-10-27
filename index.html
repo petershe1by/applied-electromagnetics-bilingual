@@ -10,5 +10,5 @@
 <script type="module">
 const showLoadError=()=>{document.getElementById('loading').hidden=true;document.getElementById('error').hidden=false;document.getElementById('errorText').textContent='网站资源加载超时或连接中断，请检查网络后重试。';document.getElementById('retry').onclick=()=>location.reload()};
 const bootTimer=setTimeout(showLoadError,20000);
-import('./app.mjs?v=perf1').then(()=>clearTimeout(bootTimer)).catch(()=>{clearTimeout(bootTimer);showLoadError()});
+import('./app.mjs?v=perf2').then(()=>clearTimeout(bootTimer)).catch(()=>{clearTimeout(bootTimer);showLoadError()});
 </script></body></html>

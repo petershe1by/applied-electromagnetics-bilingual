@@ -10,7 +10,7 @@ async function fetchTimed(url,options={},ms=25000){
 }
 const $ = id => document.getElementById(id);
 const BOOK_CACHE='em-book-gh-electromagnetics-a16a92d75a02';
-const SHELL_CACHE='em-reader-gh-electromagnetics-v4';
+const SHELL_CACHE='em-reader-gh-electromagnetics-v5';
 const KEY='em-reading-v1';
 let hadController=!!navigator.serviceWorker?.controller;
 navigator.serviceWorker?.addEventListener('controllerchange',()=>{if(hadController)location.reload();else hadController=true});
@@ -45,19 +45,21 @@ async function fetchPart(part,signal){
   return bytes;
 }
 async function drawPage(){
-  const snapshot={...state};const part=book.parts.find(p=>p.start<=snapshot.page&&p.end>=snapshot.page);
+  const snapshot={...state};const savedPart=book.parts.find(p=>p.start<=snapshot.page&&p.end>=snapshot.page);
   $('loading').hidden=false;$('error').hidden=true;$('paper').hidden=true;
   $('loading').textContent=navigator.onLine?'正在打开第 '+snapshot.page+' 页…':'正在读取离线页面…';
   try{
     const pdfjs=await getPdfJs();
-    if(activePart!==part.file){
+    const hit=await cachedResponse(savedPart);
+    const part=hit?savedPart:(book.web_parts?.find(p=>p.start<=snapshot.page&&p.end>=snapshot.page)||savedPart);
+    const partKey=hit?'cache:'+part.file:part.file;
+    if(activePart!==partKey){
       if(activeDoc){await activeDoc.loadingTask.destroy();activeDoc=null;activePart=null;}
-      const hit=await cachedResponse(part);
       const source=hit?{data:new Uint8Array(await hit.arrayBuffer())}:{url:urlFor(part.file),disableStream:true,disableAutoFetch:true,rangeChunkSize:65536};
       const task=pdfjs.getDocument({...source,cMapUrl:urlFor('./vendor/pdfjs/cmaps/'),cMapPacked:true,standardFontDataUrl:urlFor('./vendor/pdfjs/standard_fonts/'),wasmUrl:urlFor('./vendor/pdfjs/wasm/'),isEvalSupported:false});pendingLoad=task;
       task.onProgress=({loaded,total})=>{if(!renderAgain)$('loading').textContent=`正在打开第 ${snapshot.page} 页 · 已读取 ${(loaded/1024).toFixed(0)} KB${total?' / '+(total/1048576).toFixed(1)+' MB':''}`};
-      try{activeDoc=await deadline(task.promise,30000,'书籍加载超时，请检查网络后重试。',()=>{void task.destroy().catch(()=>{})})}finally{pendingLoad=null}
-      activePart=part.file;
+      try{activeDoc=await deadline(task.promise,45000,'书籍加载超时，请检查网络后重试。',()=>{void task.destroy().catch(()=>{})})}finally{pendingLoad=null}
+      activePart=partKey;
     }
     if(renderAgain)return;
     const page=await deadline(activeDoc.getPage(snapshot.page-part.start+1),25000,'页面数据读取超时，请重试。');
@@ -155,7 +157,8 @@ async function setupOffline(){
   }catch{return false}
 }
 try{
-  const {response,bytes}=await fetchTimed('./book.json',{},15000);if(!response.ok)throw new Error('目录加载失败');book=JSON.parse(new TextDecoder().decode(bytes));
+  if(navigator.serviceWorker?.controller)void ensureOffline();
+  const {response,bytes}=await fetchTimed('./book.json?v=perf2',{},15000);if(!response.ok)throw new Error('目录加载失败');book=JSON.parse(new TextDecoder().decode(bytes));
   try{cache=await caches.open(BOOK_CACHE)}catch{}
   offlineMessage();initEvents();scheduleRender();
 }catch(e){$('loading').hidden=true;$('error').hidden=false;$('errorText').textContent=e.message||'目录加载失败，请联网后重试。';$('retry').onclick=()=>location.reload();console.warn(e)}
